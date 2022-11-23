@@ -10,6 +10,9 @@ import { ListCategoryController } from "./controller/category/ListCategoryContro
 import { CreateProductController } from "./controller/products/CreateProductController";
 import uploadConfig from './config/Multer';
 import { ListByCategoryController } from "./controller/products/ListByCategoryController";
+import { CreateOrderController } from "./controller/order/CreateOrderController";
+import { RemoveOrderController } from "./controller/order/RemoveOrderController";
+
 
 
 const router = Router();
@@ -32,3 +35,8 @@ router.post('/product', Authenticated, upload.single('file'), new CreateProductC
 router.get('/category/product',Authenticated, new ListByCategoryController().handle);
 
 export { router};
+
+//Rota Order
+
+router.post('/order',Authenticated, new CreateOrderController().handle);
+router.delete('/order',Authenticated,new RemoveOrderController().handle);
