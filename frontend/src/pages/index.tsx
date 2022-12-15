@@ -2,7 +2,7 @@ import Head from 'next/head';
 import styles from '../../styles/home.module.scss'
 import Image from 'next/image';
 import {Button} from '../components/ui/Button'
-import { useContext, FormEvent, useState, useEffect } from 'react';
+import { useContext, FormEvent, useState } from 'react';
 
 import logoimg from '../../public/logo.png'
 
@@ -21,11 +21,19 @@ export default function Home() {
   async function handleLogin(event : FormEvent ) {
     event.preventDefault()
 
+    if(email===''|| password===''){
+      alert("Preencha os dados")
+      return;
+    }
+
+    setLoading(true);
+
     let data = {
       email, password
     }
 
     await signIn(data)
+    setLoading(false)
     
   }
 
@@ -53,7 +61,7 @@ export default function Home() {
 
           <Button
             type="submit"
-            loading={false}
+            loading={loading}
           >Acessar</Button>
         </form>
 

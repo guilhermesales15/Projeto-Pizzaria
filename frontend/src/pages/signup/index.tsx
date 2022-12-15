@@ -1,4 +1,4 @@
-
+import {useState, FormEvent, useContext} from 'react';
 import Head from 'next/head';
 import styles from '../../../styles/home.module.scss'
 import Image from 'next/image';
@@ -9,9 +9,39 @@ import logoimg from '../../../public/logo.png'
 import { Input } from '../../components/ui/Input';
 
 import Link from 'next/link';
+import {AuthContext} from '../../contexts/AuthContext'
 
 
 export default function SignUp() {
+  const {signUp} = useContext(AuthContext);
+
+  const[name, setName] = useState('');
+  const[email,setEmail]= useState('');
+  const[password,setPassword] = useState('');
+
+  const[ loading, setLoading] = useState(false)
+
+  async function handleSignUp(event : FormEvent) {
+    event.preventDefault();
+
+    if( name=== ''|| email=== ''|| password=== ''){
+      alert("Campos Vazios, preencha todos!")
+      return;
+    }
+
+    setLoading(true);
+
+    let data ={
+      name,
+      password,
+      email
+    }
+    
+    await signUp(data);
+
+    setLoading(false);
+  }
+
   return (
     <>
     <Head>
@@ -21,25 +51,32 @@ export default function SignUp() {
       <Image src={logoimg} alt="Logo Pizzaria"/>
       <div className={styles.login}>
         <h1>Criando sua conta</h1>
-        <form>
+        <form onSubmit={handleSignUp}>
           <Input
             placeholder='Digite seu email'
             type='text'
+            value={email}
+            onChange={(e) =>setEmail(e.target.value)}
           />
 
           <Input
             placeholder='Digite seu Nome'
             type='text'
+            value={name}
+            onChange ={(e) =>setName(e.target.value)}
           />
 
           <Input
           placeholder='Digite sua senha'
           type='password'
+          value ={password}
+          onChange = {(e) =>setPassword(e.target.value)}
+
           />
 
           <Button
             type="submit"
-            loading={false}
+            loading={loading}
           >Cadastrar</Button>
         </form>
 
