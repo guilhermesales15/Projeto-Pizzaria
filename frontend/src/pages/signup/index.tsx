@@ -10,6 +10,7 @@ import { Input } from '../../components/ui/Input';
 
 import Link from 'next/link';
 import {AuthContext} from '../../contexts/AuthContext'
+import { toast } from 'react-toastify';
 
 
 export default function SignUp() {
@@ -25,7 +26,7 @@ export default function SignUp() {
     event.preventDefault();
 
     if( name=== ''|| email=== ''|| password=== ''){
-      alert("Campos Vazios, preencha todos!")
+      toast.error('Campos vazios, preencha corretamente')
       return;
     }
 
