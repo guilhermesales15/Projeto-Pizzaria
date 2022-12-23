@@ -48,6 +48,7 @@ export default function Home() {
     <div className={styles.containerCenter}>
       <Image src={logoimg} alt="Logo Pizzaria"/>
       <div className={styles.login}>
+        <h1>PizzariaJs - Faça seu login!</h1>
         <form onSubmit={handleLogin}>
           <Input
             placeholder='Digite seu email'
