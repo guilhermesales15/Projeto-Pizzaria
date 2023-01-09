@@ -2,7 +2,7 @@ import { useState, FormEvent } from 'react'
 import Head from "next/head"
 import { Header } from '../../components/ui/Header'
 import styles from './styles.module.scss'
-
+import { canSSRauth } from '../../utils/canSSRauth'
 import { setupAPIClient } from '../../services/api'
 import { toast } from 'react-toastify'
 
@@ -58,3 +58,9 @@ export default function Category(){
     </>
   )
 }
+
+export const getServerSideProps = canSSRauth(async(ctx) =>{
+  return {
+    props: {}
+  }
+})
