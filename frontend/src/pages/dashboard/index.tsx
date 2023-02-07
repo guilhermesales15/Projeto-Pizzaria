@@ -50,7 +50,8 @@ type OrderProps = {
     const [modalItem, setModalItem] = useState<OrderItemProps[]>()
     const [modalVisible, setModalVisible] = useState(false);
   
-  
+
+
     function handleCloseModal(){
       setModalVisible(false);
     }

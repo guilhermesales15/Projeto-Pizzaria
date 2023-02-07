@@ -3,6 +3,8 @@ import styles from './style.module.scss';
 import { OrderItemProps } from "../../pages/dashboard";
 
 import {FiX} from 'react-icons/fi';
+import Product from "../../pages/product";
+
 
 
 interface ModalOrderProps{
@@ -11,6 +13,7 @@ interface ModalOrderProps{
   order: OrderItemProps[];
   handleFinishOrder: (id: string) => void;
 }
+
 
 export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}:ModalOrderProps){
   const customStyles ={
@@ -23,7 +26,10 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}:Mo
       transform: 'translate(-50%, -50%)',
       backgroundColor: '#1d1d2e'
     }
+
+  
   };
+  
   return(
     <Modal
       isOpen={isOpen}
@@ -49,11 +55,11 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}:Mo
 
       {order.map(item =>(
         <section key={item.id} className={styles.containerItem}>
-          <span>{item.amount} - <strong>{item.product.name}</strong></span>
+          <span>{item.amount} - <strong>{item.product.name}</strong> - {item.product.price}</span>
           <span className={styles.description}>{item.product.description}</span>
         </section>
       ))}
-
+ 
       <button className={styles.buttonOrder} onClick={() =>handleFinishOrder(order[0]?.order_id)}>
         concluir pedido
       </button>
