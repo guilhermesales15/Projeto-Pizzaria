@@ -1,8 +1,26 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
-
+import { AuthContext } from '../../contents/AuthContext';
 
 export default function SignIn(){
+
+    const {signIn} = useContext(AuthContext);
+
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    async function handleLogin(){
+        if(email==='' || password===''){
+            alert('Email/senha vazios !!!!')
+            return;
+            
+        }
+
+        await signIn({email,password});
+    }
+
     return(
         <View style={styles.container}>
             { <Image style={styles.logo} source={require('../../assets/logo.png')}/>}
@@ -10,18 +28,22 @@ export default function SignIn(){
             <Text style={styles.title}>PizzariaJs - Faça seu login!</Text>
             <View style={styles.inputContainer}>
                 <TextInput
-                    placeholder='Digite o seu Login'
+                    placeholder='Digite seu email'
                     style={styles.input}
                     placeholderTextColor='#f0f0f0'
+                    value={email}
+                    onChangeText={setEmail}
                 />
                  <TextInput
                     placeholder='Digite sua senha'
                     style={styles.input}
                     placeholderTextColor='#f0f0f0'
                     secureTextEntry={true}
+                    value={password}
+                    onChangeText={setPassword}
                 />
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={handleLogin}>
                     <Text style={styles.buttonText}>acessar</Text>
                 </TouchableOpacity>
             </View>
