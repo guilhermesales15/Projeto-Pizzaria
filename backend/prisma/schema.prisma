@@ -35,7 +35,7 @@ model Category{
 model Product{
   id String @id @default(uuid())
   name String
-  price String
+  price Float
   description String
   banner String
   category Category @relation(fields: [category_id],references: [id])
@@ -54,6 +54,7 @@ model Order{
   draft Boolean @default(true)
   name String?
   items Item[]
+  total Float
 
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())

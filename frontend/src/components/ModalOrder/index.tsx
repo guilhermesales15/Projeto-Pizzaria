@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import styles from './style.module.scss';
 import { OrderItemProps } from "../../pages/dashboard";
+import { useEffect, useState } from "react";
 
 import {FiX} from 'react-icons/fi';
 import Product from "../../pages/product";
@@ -15,7 +16,12 @@ interface ModalOrderProps{
 }
 
 
-export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}:ModalOrderProps){
+
+
+export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder, }:ModalOrderProps){
+
+  
+  
   const customStyles ={
     content:{
       top:'50%',
@@ -57,6 +63,7 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}:Mo
         <section key={item.id} className={styles.containerItem}>
           <span>{item.amount} - <strong>{item.product.name}</strong> - {item.product.price}</span>
           <span className={styles.description}>{item.product.description}</span>
+          <span>Total:  </span>
         </section>
       ))}
  

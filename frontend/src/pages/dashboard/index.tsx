@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 import {FiRefreshCcw} from 'react-icons/fi'
 import { setupAPIClient } from "../../services/api"
 import { type } from "os"
-import { use, useState } from "react"
+import { useEffect, useState } from "react"
 import Modal from 'react-modal';
 import { ModalOrder } from "../../components/ModalOrder"
 import { api } from "../../services/apiClient"
@@ -32,7 +32,7 @@ type OrderProps = {
       id: string;
       name: string;
       description: string;
-      price: string;
+      price:  number;
       banner: string;
     }
     order:{
@@ -40,7 +40,9 @@ type OrderProps = {
       table: string | number;
       status: boolean;
       name: string | null;
+      
     }
+    
   }
   
   export default function Dashboard({ orders }: HomeProps){
@@ -49,6 +51,7 @@ type OrderProps = {
   
     const [modalItem, setModalItem] = useState<OrderItemProps[]>()
     const [modalVisible, setModalVisible] = useState(false);
+    const [totalP, setTotal] = useState<OrderItemProps>()
   
 
 
@@ -84,6 +87,8 @@ type OrderProps = {
 
       setModalVisible(false);
     }
+
+    
   
   
     async function handleRefreshOrders(){
@@ -93,6 +98,9 @@ type OrderProps = {
       setOrderList(response.data);
   
     }
+
+    
+
   
     Modal.setAppElement('#__next');
   
